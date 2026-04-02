@@ -1,8 +1,10 @@
 // კოდერი — მთავარი პროცესი (Electron Main Process)
 // ეს ფაილი ქმნის აპლიკაციის ფანჯარას და მართავს Electron-ის ძირითად ლოგიკას
 
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
+import { registerAuthHandlers } from './auth';
+import { createUserDir } from './fileSystem';
 
 // განვითარების რეჟიმის შემოწმება
 const isDev = !app.isPackaged;
@@ -38,6 +40,9 @@ function createWindow(): void {
 
 // აპლიკაციის მზადყოფნის შემდეგ ფანჯრის შექმნა
 app.whenReady().then(() => {
+  // IPC ჰენდლერების რეგისტრაცია
+  registerAuthHandlers();
+
   createWindow();
 
   // macOS-ზე dock-ზე დაკლიკებისას ახალი ფანჯრის შექმნა

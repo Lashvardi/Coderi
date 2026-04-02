@@ -30,8 +30,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  padding: 48px;
+  gap: 24px;
+  padding: 32px 48px;
+  padding-bottom: 48px;
   max-width: 460px;
   width: 100%;
 }
@@ -44,12 +45,24 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  background: #0078d4;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  color: #ffffff;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 12px;
+}
+
+.home-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* ტულბარში ლოგო (პატარა ზომა) */
+.toolbar-logo-img {
+  height: 16px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
 .home-title {
@@ -485,4 +498,93 @@ body {
 .auth-link:hover {
   color: #6bc0f5;
   text-decoration: underline;
+}
+
+/* შეცდომის შეტყობინება */
+
+.form-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #3c1e1e;
+  border: 1px solid #f14c4c;
+  border-radius: 4px;
+  color: #f14c4c;
+  font-size: 13px;
+}
+
+/* disabled ღილაკი */
+
+.form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* მისალმების ბეჯი (Home Page) */
+
+.home-greeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: #2b4a2b;
+  border: 1px solid #3c6b3c;
+  border-radius: 6px;
+  color: #89d185;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  justify-content: center;
+}
+
+/* გამოსვლის ღილაკი */
+
+.auth-btn-logout {
+  border-color: #5a3c3c;
+  color: #cccccc;
+}
+
+.auth-btn-logout:hover {
+  background: #3c2626;
+  border-color: #7a4a4a;
+}
+
+/* DEBUG სექცია — წაშალე პროდაქშენში */
+
+.debug-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed #3c3c3c;
+  width: 100%;
+  justify-content: center;
+}
+
+.debug-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px dashed #6a4a4a;
+  border-radius: 4px;
+  color: #f14c4c;
+  font-size: 11px;
+  font-family: monospace;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.1s;
+}
+
+.debug-btn:hover {
+  opacity: 1;
+  background: #2a1a1a;
+}
+
+.debug-msg {
+  font-size: 11px;
+  color: #89d185;
+  font-family: monospace;
 }

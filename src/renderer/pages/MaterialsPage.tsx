@@ -5,6 +5,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, BookOpen } from 'lucide-react';
+import { APP_LABEL } from '../constants';
 
 const MaterialsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const MaterialsPage: React.FC = () => {
       </div>
 
       <div className="home-footer">
-        <span>კოდერი v1.0.0</span>
+        <span>{APP_LABEL}</span>
       </div>
     </div>
   );

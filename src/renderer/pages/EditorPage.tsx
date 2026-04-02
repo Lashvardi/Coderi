@@ -4,7 +4,9 @@
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Code2, Globe, Terminal } from 'lucide-react';
+import { ArrowLeft, Globe, Terminal } from 'lucide-react';
+import logoSvg from '../assets/logo.svg';
+import UserBadge from '../components/UserBadge';
 
 const EditorPage: React.FC = () => {
   const { mode } = useParams<{ mode: string }>();
@@ -23,7 +25,7 @@ const EditorPage: React.FC = () => {
             <ArrowLeft size={16} />
           </button>
           <div className="toolbar-divider" />
-          <Code2 size={16} className="toolbar-logo" />
+          <img src={logoSvg} alt="კოდერი" className="toolbar-logo-img" />
           <span className="toolbar-title">კოდერი</span>
         </div>
         <div className="toolbar-center">
@@ -33,7 +35,7 @@ const EditorPage: React.FC = () => {
           </div>
         </div>
         <div className="toolbar-right">
-          {/* პროფილის ღილაკი დაემატება Phase 3-ში */}
+          <UserBadge />
         </div>
       </div>
 

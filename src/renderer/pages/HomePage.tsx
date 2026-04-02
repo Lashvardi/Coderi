@@ -1,24 +1,44 @@
 // კოდერი — მთავარი გვერდი (Home Page)
-// სამი მთავარი ღილაკი ნავიგაციით და ავტორიზაციის სექცია
+// სამი მთავარი ღილაკი, ავტორიზაცია და მისალმება
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Globe, Terminal, BookOpen, LogIn, UserPlus, Code2 } from 'lucide-react';
+import { Globe, Terminal, BookOpen, LogIn, UserPlus, LogOut, User, Trash2 } from 'lucide-react';
+import logoSvg from '../assets/logo.svg';
+import { useAuth } from '../context/AuthContext';
+import { APP_LABEL } from '../constants';
 import '../styles/global.css';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const [debugMsg, setDebugMsg] = useState('');
+
+  const handleClearUsers = async () => {
+    await window.koderiAPI.auth.clearAll();
+    logout();
+    setDebugMsg('ყველა მომხმარებელი წაიშალა');
+    setTimeout(() => setDebugMsg(''), 3000);
+  };
 
   return (
     <div className="home-container">
       {/* ლოგო და სათაური */}
       <div className="home-header">
         <div className="home-logo">
-          <Code2 size={32} strokeWidth={2} />
+          <img src={logoSvg} alt="კოდერი" className="home-logo-img" />
         </div>
         <h1 className="home-title">კოდერი</h1>
-        <p className="home-subtitle">პროგრამირება გამარტივებული!</p>
+        <p className="home-subtitle">ქართული IDE</p>
       </div>
+
+      {/* მისალმება — თუ მომხმარებელი შესულია */}
+      {user && (
+        <div className="home-greeting">
+          <User size={16} />
+          <span>გამარჯობა, {user.name}!</span>
+        </div>
+      )}
 
       {/* მთავარი ღილაკები */}
       <div className="home-buttons">
@@ -64,19 +84,37 @@ const HomePage: React.FC = () => {
 
       {/* ავტორიზაციის ღილაკები */}
       <div className="home-auth">
-        <button className="auth-btn auth-btn-login" onClick={() => navigate('/login')}>
-          <LogIn size={15} />
-          <span>შესვლა</span>
+        {user ? (
+          <button className="auth-btn auth-btn-logout" onClick={logout}>
+            <LogOut size={15} />
+            <span>გამოსვლა</span>
+          </button>
+        ) : (
+          <>
+            <button className="auth-btn auth-btn-login" onClick={() => navigate('/login')}>
+              <LogIn size={15} />
+              <span>შესვლა</span>
+            </button>
+            <button className="auth-btn auth-btn-register" onClick={() => navigate('/register')}>
+              <UserPlus size={15} />
+              <span>რეგისტრაცია</span>
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* DEBUG: მომხმარებლების წაშლა */}
+      <div className="debug-section">
+        <button className="debug-btn" onClick={handleClearUsers}>
+          <Trash2 size={13} />
+          <span>Clear All Users</span>
         </button>
-        <button className="auth-btn auth-btn-register" onClick={() => navigate('/register')}>
-          <UserPlus size={15} />
-          <span>რეგისტრაცია</span>
-        </button>
+        {debugMsg && <span className="debug-msg">{debugMsg}</span>}
       </div>
 
       {/* სტატუს ბარი */}
       <div className="home-footer">
-        <span>კოდერი v1.0.0</span>
+        <span>{APP_LABEL}</span>
       </div>
     </div>
   );

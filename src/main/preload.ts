@@ -1,11 +1,19 @@
 // კოდერი — Preload სკრიპტი
-// ეს ფაილი არის ხიდი Main პროცესსა და Renderer პროცესს შორის
-// contextBridge-ის საშუალებით უსაფრთხოდ გადავცემთ API-ს renderer-ს
+// ხიდი Main პროცესსა და Renderer პროცესს შორის
+// contextBridge-ით უსაფრთხოდ გადავცემთ API-ს renderer-ს
 
-import { contextBridge } from 'electron';
+import { contextBridge, ipcRenderer } from 'electron';
 
 // API-ს გამოტანა renderer პროცესისთვის
 contextBridge.exposeInMainWorld('koderiAPI', {
-  // ფაილური სისტემის ოპერაციები (შემდეგ ფაზებში დაემატება)
   platform: process.platform,
+
+  // ავტორიზაციის API
+  auth: {
+    register: (data: { name: string; username: string; password: string }) =>
+      ipcRenderer.invoke('auth:register', data),
+    login: (data: { username: string; password: string }) =>
+      ipcRenderer.invoke('auth:login', data),
+    clearAll: () => ipcRenderer.invoke('auth:clearAll'),
+  },
 });
