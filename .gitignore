@@ -1,0 +1,14 @@
+node_modules/
+dist/
+release/
+*.log
+.DS_Store
+.env
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.bak
+*.tm
+.claude
