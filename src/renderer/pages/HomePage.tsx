@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
           </div>
           <div className="btn-text">
             <span className="btn-label">ფრონტ-ენდი</span>
-            <span className="btn-desc">HTML, CSS, JavaScript</span>
+            <span className="btn-desc">WEB პროგრამირება</span>
           </div>
         </button>
 
@@ -64,7 +64,7 @@ const HomePage: React.FC = () => {
           </div>
           <div className="btn-text">
             <span className="btn-label">Python</span>
-            <span className="btn-desc">სკრიპტები და პროგრამები</span>
+            <span className="btn-desc">Python პროგრამირება</span>
           </div>
         </button>
 
@@ -77,7 +77,7 @@ const HomePage: React.FC = () => {
           </div>
           <div className="btn-text">
             <span className="btn-label">მასალები</span>
-            <span className="btn-desc">გაკვეთილები და სილაბუსი</span>
+            <span className="btn-desc">საჭირო მასალები</span>
           </div>
         </button>
       </div>

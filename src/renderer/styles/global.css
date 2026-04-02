@@ -364,6 +364,389 @@ body {
   justify-content: center;
 }
 
+/* ===== მასალების გვერდი (Materials) ===== */
+
+.materials-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+/* ===== Breadcrumbs (ნავიგაციის ბილიკი) ===== */
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  background: #252526;
+  border-bottom: 1px solid #3c3c3c;
+  min-height: 32px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-link {
+  background: none;
+  border: none;
+  color: #4fa8e8;
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background 0.1s, color 0.1s;
+}
+
+.breadcrumb-link:hover {
+  color: #6bc0f5;
+  background: #2d2d2d;
+}
+
+.breadcrumb-sep {
+  color: #505050;
+  flex-shrink: 0;
+}
+
+.breadcrumb-current {
+  font-size: 12px;
+  color: #cccccc;
+  padding: 2px 4px;
+}
+
+/* ===== საქაღალდეების გრიდი (Folder Browser) ===== */
+
+.folder-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+.folder-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+  color: #cccccc;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s, border-color 0.15s;
+}
+
+.folder-item:hover {
+  background: #2d2d2d;
+  border-color: #505050;
+}
+
+.folder-item:active {
+  background: #333333;
+}
+
+.folder-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #333333;
+  flex-shrink: 0;
+}
+
+.folder-item-icon-frontend {
+  color: #4ec970;
+}
+
+.folder-item-icon-python {
+  color: #4fa8e8;
+}
+
+.folder-item-icon-lecture {
+  color: #e8b84f;
+}
+
+.folder-item-icon-file {
+  color: #9a9a9a;
+}
+
+.folder-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.folder-item-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e0e0e0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.folder-item-desc {
+  font-size: 12px;
+  color: #858585;
+}
+
+.folder-item-arrow {
+  color: #505050;
+  flex-shrink: 0;
+  transition: color 0.1s;
+}
+
+.folder-item:hover .folder-item-arrow {
+  color: #858585;
+}
+
+/* ===== გაკვეთილის კონტენტი (Lesson Detail) ===== */
+
+.lesson-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Markdown ელემენტები — react-markdown */
+
+.lesson-content h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.lesson-content h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.lesson-content h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #d4d4d4;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
+.lesson-content p {
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.lesson-content ul,
+.lesson-content ol {
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+.lesson-content li {
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.lesson-content li::marker {
+  color: #0078d4;
+}
+
+.lesson-content strong {
+  color: #e0e0e0;
+  font-weight: 600;
+}
+
+.lesson-content em {
+  color: #b5b5b5;
+  font-style: italic;
+}
+
+/* ინლაინ კოდი */
+.lesson-inline-code {
+  background: #3c3c3c;
+  color: #ce9178;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+}
+
+/* კოდის ბლოკი */
+.lesson-code-block {
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.code-lang {
+  background: #2d2d2d;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: #858585;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.lesson-code-block pre {
+  margin: 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+}
+
+.lesson-code-block code {
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  color: #d4d4d4;
+  line-height: 1.6;
+}
+
+/* ბმულები */
+.lesson-link {
+  color: #4fa8e8;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+.lesson-link:hover {
+  color: #6bc0f5;
+  text-decoration: underline;
+}
+
+/* ცხრილი */
+.lesson-table-wrap {
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.lesson-table th,
+.lesson-table td {
+  padding: 8px 12px;
+  border: 1px solid #3c3c3c;
+  text-align: left;
+  color: #cccccc;
+}
+
+.lesson-table th {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  font-weight: 600;
+}
+
+.lesson-table tr:hover {
+  background: #252526;
+}
+
+/* ბლოკ-ციტატა */
+.lesson-blockquote {
+  border-left: 3px solid #0078d4;
+  padding: 8px 16px;
+  margin: 12px 0;
+  background: #252526;
+  border-radius: 0 4px 4px 0;
+}
+
+.lesson-blockquote p {
+  color: #b5b5b5;
+  margin-bottom: 0;
+}
+
+/* ჰორიზონტალური ხაზი */
+.lesson-hr {
+  border: none;
+  border-top: 1px solid #3c3c3c;
+  margin: 24px 0;
+}
+
+/* YouTube ვიდეო ჩაშენება */
+.lesson-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  margin: 16px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+}
+
+.lesson-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* სასარგებლო ბმულების სექცია */
+.lesson-links-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid #3c3c3c;
+}
+
+.lesson-links-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-bottom: 12px;
+}
+
+.lesson-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lesson-link-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  border-radius: 6px;
+  color: #4fa8e8;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.1s, border-color 0.1s;
+}
+
+.lesson-link-card:hover {
+  background: #2d2d2d;
+  border-color: #505050;
+  color: #6bc0f5;
+}
+
 /* ===== ავტორიზაციის გვერდები (Login / Register) ===== */
 
 .auth-layout {

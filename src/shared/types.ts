@@ -28,10 +28,40 @@ export interface Project {
 // რედაქტორის რეჟიმი
 export type EditorMode = 'frontend' | 'python';
 
-// გაკვეთილის ინტერფეისი
+// სასარგებლო ბმულის ინტერფეისი
+export interface HelpfulLink {
+  title: string;
+  url: string;
+}
+
+// მასალის ინტერფეისი (ერთი თემა / ქვეთავი)
+export interface Material {
+  id: string;
+  title: string;
+  content: string;
+  links?: HelpfulLink[];
+}
+
+// ლექციის ინტერფეისი (შეიცავს მრავალ მასალას)
+export interface Lecture {
+  id: string;
+  title: string;
+  materials: Material[];
+}
+
+// კურსის ინტერფეისი (შეიცავს მრავალ ლექციას)
+export interface Course {
+  id: string;
+  title: string;
+  icon: 'frontend' | 'python';
+  lectures: Lecture[];
+}
+
+// ძველი Lesson ტიპი — backwards compat
 export interface Lesson {
   id: string;
   title: string;
   category: 'frontend' | 'python';
   content: string;
+  links?: HelpfulLink[];
 }
