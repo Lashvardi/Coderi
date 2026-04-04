@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
       <div className="home-buttons">
         <button
           className="home-btn home-btn-frontend"
-          onClick={() => navigate('/editor/frontend')}
+          onClick={() => navigate('/projects/frontend')}
         >
           <div className="btn-icon">
             <Globe size={18} />
@@ -57,7 +57,7 @@ const HomePage: React.FC = () => {
 
         <button
           className="home-btn home-btn-python"
-          onClick={() => navigate('/editor/python')}
+          onClick={() => navigate('/projects/python')}
         >
           <div className="btn-icon">
             <Terminal size={18} />

@@ -4,7 +4,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { registerAuthHandlers } from './auth';
-import { createUserDir } from './fileSystem';
+import { registerFsHandlers } from './fileSystem';
+import { registerRunHandlers } from './runner';
 
 // განვითარების რეჟიმის შემოწმება
 const isDev = !app.isPackaged;
@@ -26,7 +27,7 @@ function createWindow(): void {
 
   // კონტენტის ჩატვირთვა — dev სერვერიდან ან build-იდან
   if (isDev) {
-    mainWindow.loadURL('http://localhost:5173');
+    mainWindow.loadURL('http://localhost:5200');
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
@@ -42,6 +43,8 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // IPC ჰენდლერების რეგისტრაცია
   registerAuthHandlers();
+  registerFsHandlers();
+  registerRunHandlers();
 
   createWindow();
 

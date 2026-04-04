@@ -5,6 +5,7 @@ import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import HomePage from './pages/HomePage';
+import ProjectsPage from './pages/ProjectsPage';
 import EditorPage from './pages/EditorPage';
 import MaterialsPage from './pages/MaterialsPage';
 import LoginPage from './pages/LoginPage';
@@ -16,7 +17,8 @@ const App: React.FC = () => {
       <HashRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/editor/:mode" element={<EditorPage />} />
+          <Route path="/projects/:mode" element={<ProjectsPage />} />
+          <Route path="/editor/:mode/:project" element={<EditorPage />} />
           <Route path="/materials" element={<MaterialsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
