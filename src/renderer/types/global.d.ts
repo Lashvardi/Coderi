@@ -53,6 +53,11 @@ interface KoderiAPI {
     write: (mode: string, projectName: string, fileName: string, content: string, username?: string) => Promise<FsResult>;
     delete: (mode: string, projectName: string, fileName: string, username?: string) => Promise<FsResult>;
   };
+  window: {
+    minimize: () => void;
+    maximize: () => void;
+    close: () => void;
+  };
   run: {
     frontend: (projectName: string, username?: string) => Promise<RunFrontendResult>;
     stop: () => Promise<FsResult>;

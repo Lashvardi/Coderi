@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, LogIn, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { APP_LABEL } from '../constants';
+import TitleBar from '../components/TitleBar';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="auth-layout">
+      <TitleBar />
       <div className="auth-card">
         <button className="auth-back" onClick={() => navigate('/')}>
           <ArrowLeft size={16} />

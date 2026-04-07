@@ -38,6 +38,13 @@ contextBridge.exposeInMainWorld('koderiAPI', {
       ipcRenderer.invoke('fs:delete', mode, projectName, fileName, username),
   },
 
+  // ფანჯრის კონტროლი (Windows/Linux)
+  window: {
+    minimize: () => ipcRenderer.send('window:minimize'),
+    maximize: () => ipcRenderer.send('window:maximize'),
+    close: () => ipcRenderer.send('window:close'),
+  },
+
   // კოდის გაშვების API
   run: {
     frontend: (projectName: string, username?: string) =>

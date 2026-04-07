@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { APP_LABEL } from '../constants';
+import TitleBar from '../components/TitleBar';
 
 interface ProjectEntry {
   name: string;
@@ -95,6 +96,7 @@ const ProjectsPage: React.FC = () => {
 
   return (
     <div className="page-layout">
+      <TitleBar />
       {/* ტულბარი */}
       <div className="page-toolbar">
         <button className="toolbar-btn" onClick={() => navigate('/')} title="უკან">

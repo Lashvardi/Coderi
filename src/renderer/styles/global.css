@@ -24,6 +24,66 @@ body {
   justify-content: center;
 }
 
+/* ===== სათაურის ზოლი & ფანჯრის კონტროლი ===== */
+
+.titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 9999;
+  -webkit-app-region: drag;
+}
+
+.titlebar-drag {
+  flex: 1;
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.window-ctrl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: #cccccc;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.window-ctrl-btn:hover {
+  background: #3c3c3c;
+}
+
+.window-ctrl-close:hover {
+  background: #e81123;
+  color: #ffffff;
+}
+
+/* titlebar spacing for non-editor pages */
+.home-container {
+  padding-top: 40px;
+}
+
+.page-layout {
+  padding-top: 32px;
+}
+
+.auth-layout {
+  padding-top: 32px;
+}
+
 /* ===== მთავარი გვერდი ===== */
 
 .home-container {
@@ -235,6 +295,7 @@ body {
   background: #333333;
   border-bottom: 1px solid #3c3c3c;
   padding: 0 10px;
+  padding-left: env(titlebar-area-x, 78px);
   -webkit-app-region: drag;
 }
 
@@ -1925,6 +1986,30 @@ body {
   background: #37373d;
 }
 
+/* ===== ტექსტიანი ღილაკები ===== */
+
+.toolbar-btn-text {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  width: auto;
+  padding: 0 10px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #cccccc;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 0.1s;
+}
+
+.toolbar-btn-text:hover {
+  background: #4a4a4a;
+}
+
 /* ===== Run ღილაკები ===== */
 
 .run-btn-play {
@@ -2117,4 +2202,51 @@ body {
   font-weight: 400;
   color: #606060;
   font-size: 11px;
+}
+
+/* ===== წაშლის დადასტურების მოდალი ===== */
+
+.delete-modal {
+  max-width: 380px;
+}
+
+.delete-modal-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.delete-modal-content p {
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 1.5;
+}
+
+.delete-modal-content strong {
+  color: #ffffff;
+}
+
+.delete-modal-icon {
+  color: #f14c4c;
+  flex-shrink: 0;
+}
+
+.modal-btn-delete {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #c42b2b;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.modal-btn-delete:hover {
+  background: #e03e3e;
 }

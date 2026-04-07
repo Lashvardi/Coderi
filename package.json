@@ -21,9 +21,38 @@
     "concurrently": "^8.2.0",
     "electron": "^31.0.0",
     "electron-builder": "^24.13.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.5.0",
     "vite": "^5.4.0",
     "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.koderi.app",
+    "productName": "კოდერი",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "resources/icon.png"
+    ],
+    "mac": {
+      "icon": "resources/icon.icns",
+      "category": "public.app-category.education",
+      "target": ["dmg"]
+    },
+    "win": {
+      "icon": "resources/icon.ico",
+      "target": ["nsis"]
+    },
+    "linux": {
+      "icon": "resources/icon.png",
+      "target": ["AppImage"]
+    },
+    "nsis": {
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false
+    }
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",

@@ -12,8 +12,8 @@ const UserBadge: React.FC = () => {
 
   if (!user) {
     return (
-      <button className="toolbar-btn" onClick={() => navigate('/login')} title="შესვლა">
-        <LogIn size={16} />
+      <button className="toolbar-btn-text" onClick={() => navigate('/login')} title="შესვლა">
+        <LogIn size={14} /> შესვლა
       </button>
     );
   }

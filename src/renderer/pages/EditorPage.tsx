@@ -7,6 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Globe, Terminal, FileCode2, FileText,
   FileType, Save, Plus, Trash2, X, Play, Square,
+  Minus, Maximize2,
 } from 'lucide-react';
 import logoSvg from '../assets/logo.svg';
 import UserBadge from '../components/UserBadge';
@@ -95,6 +96,9 @@ const EditorPage: React.FC = () => {
   const [customName, setCustomName] = useState('');
   const [fileError, setFileError] = useState('');
   const nameInputRef = useRef<HTMLInputElement>(null);
+
+  // წაშლის დადასტურების მოდალი
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   // Run panel სტეიტი
   const [running, setRunning] = useState(false);
@@ -283,14 +287,16 @@ const EditorPage: React.FC = () => {
   }, [selectedTemplate, customName, existingNames, mode, projectName, username]);
 
   // ფაილის წაშლა
-  const deleteFile = useCallback(async (fileName: string) => {
-    await window.koderiAPI.fs.delete(mode!, projectName, fileName, username);
-    setFiles(prev => prev.filter(f => f.name !== fileName));
-    if (activeFile === fileName) {
-      const remaining = files.filter(f => f.name !== fileName);
+  const confirmDelete = useCallback(async () => {
+    if (!deleteTarget) return;
+    await window.koderiAPI.fs.delete(mode!, projectName, deleteTarget, username);
+    setFiles(prev => prev.filter(f => f.name !== deleteTarget));
+    if (activeFile === deleteTarget) {
+      const remaining = files.filter(f => f.name !== deleteTarget);
       setActiveFile(remaining[0]?.name || '');
     }
-  }, [files, activeFile, username, mode, projectName]);
+    setDeleteTarget(null);
+  }, [deleteTarget, files, activeFile, username, mode, projectName]);
 
   if (!loaded) {
     return (
@@ -324,28 +330,39 @@ const EditorPage: React.FC = () => {
           <img src={logoSvg} alt="კოდერი" className="toolbar-logo-img" />
           <span className="toolbar-title">{projectName}</span>
         </div>
-        <div className="toolbar-center">
-          <div className="toolbar-mode">
-            <ModeIcon size={14} />
-            <span>{modeLabel}</span>
-          </div>
-        </div>
+        <div className="toolbar-center" />
         <div className="toolbar-right">
-          <button className="toolbar-btn" onClick={saveAll} title="ყველას შენახვა (Ctrl+S)">
-            <Save size={15} />
+          <button className="toolbar-btn-text" onClick={saveAll} title="ყველას შენახვა (Ctrl+S)">
+            <Save size={14} /> შენახვა
           </button>
           <div className="toolbar-divider" />
           {running ? (
-            <button className="toolbar-btn run-btn-stop" onClick={handleStop} title="გაჩერება">
-              <Square size={14} />
+            <button className="toolbar-btn-text run-btn-stop" onClick={handleStop} title="გაჩერება">
+              <Square size={14} /> გაჩერება
             </button>
           ) : (
-            <button className="toolbar-btn run-btn-play" onClick={handleRun} title="გაშვება" disabled={files.length === 0}>
-              <Play size={15} />
+            <button className="toolbar-btn-text run-btn-play" onClick={handleRun} title="გაშვება" disabled={files.length === 0}>
+              <Play size={14} /> გაშვება
             </button>
           )}
           <div className="toolbar-divider" />
           <UserBadge />
+          {window.koderiAPI.platform !== 'darwin' && (
+            <>
+              <div className="toolbar-divider" />
+              <div className="window-controls">
+                <button className="window-ctrl-btn" onClick={() => window.koderiAPI.window.minimize()} title="შემცირება">
+                  <Minus size={14} />
+                </button>
+                <button className="window-ctrl-btn" onClick={() => window.koderiAPI.window.maximize()} title="გადიდება">
+                  <Maximize2 size={12} />
+                </button>
+                <button className="window-ctrl-btn window-ctrl-close" onClick={() => window.koderiAPI.window.close()} title="დახურვა">
+                  <X size={14} />
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -371,7 +388,7 @@ const EditorPage: React.FC = () => {
                 {!file.saved && <span className="sidebar-file-dot" />}
                 <button
                   className="sidebar-file-delete"
-                  onClick={(e) => { e.stopPropagation(); deleteFile(file.name); }}
+                  onClick={(e) => { e.stopPropagation(); setDeleteTarget(file.name); }}
                   title="წაშლა"
                 >
                   <Trash2 size={12} />
@@ -530,6 +547,33 @@ const EditorPage: React.FC = () => {
               >
                 <Plus size={14} />
                 <span>შექმნა</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ფაილის წაშლის დადასტურების მოდალი */}
+      {deleteTarget && (
+        <div className="modal-overlay" onClick={() => setDeleteTarget(null)}>
+          <div className="modal-card delete-modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>ფაილის წაშლა</h3>
+              <button className="modal-close" onClick={() => setDeleteTarget(null)}>
+                <X size={16} />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="delete-modal-content">
+                <Trash2 size={20} className="delete-modal-icon" />
+                <p>ნამდვილად გსურს <strong>{deleteTarget}</strong> ფაილის წაშლა?</p>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="modal-btn-cancel" onClick={() => setDeleteTarget(null)}>გაუქმება</button>
+              <button className="modal-btn-delete" onClick={confirmDelete}>
+                <Trash2 size={14} />
+                <span>წაშლა</span>
               </button>
             </div>
           </div>

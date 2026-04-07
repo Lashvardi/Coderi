@@ -12,6 +12,7 @@ import {
   Globe, Terminal, ExternalLink, Layers, Hash,
 } from 'lucide-react';
 import { APP_LABEL } from '../constants';
+import TitleBar from '../components/TitleBar';
 import { mockCourses } from '../data/mockMaterials';
 import { Course, Lecture, Material } from '../../shared/types';
 
@@ -78,6 +79,7 @@ const MaterialsPage: React.FC = () => {
     const mat = view.material;
     return (
       <div className="page-layout">
+        <TitleBar />
         <div className="page-toolbar">
           <button className="toolbar-btn" onClick={handleBack} title="უკან">
             <ArrowLeft size={16} />
@@ -151,6 +153,7 @@ const MaterialsPage: React.FC = () => {
 
     return (
       <div className="page-layout">
+        <TitleBar />
         <div className="page-toolbar">
           <button className="toolbar-btn" onClick={() => navigate('/')} title="უკან">
             <ArrowLeft size={16} />
@@ -231,6 +234,7 @@ const MaterialsPage: React.FC = () => {
 
     return (
       <div className="page-layout">
+        <TitleBar />
         <div className="page-toolbar">
           <button className="toolbar-btn" onClick={handleBack} title="უკან">
             <ArrowLeft size={16} />
@@ -285,6 +289,7 @@ const MaterialsPage: React.FC = () => {
   if (view.level === 'lecture') {
     return (
       <div className="page-layout">
+        <TitleBar />
         <div className="page-toolbar">
           <button className="toolbar-btn" onClick={handleBack} title="უკან">
             <ArrowLeft size={16} />
