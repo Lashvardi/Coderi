@@ -6,11 +6,12 @@ import path from 'path';
 import { registerAuthHandlers } from './auth';
 import { registerFsHandlers } from './fileSystem';
 import { registerRunHandlers } from './runner';
+import { setupAutoUpdater } from './updater';
 
 // განვითარების რეჟიმის შემოწმება
 const isDev = !app.isPackaged;
 
-function createWindow(): void {
+function createWindow(): BrowserWindow {
   // მთავარი ფანჯრის შექმნა
   const isMac = process.platform === 'darwin';
 
@@ -55,6 +56,8 @@ function createWindow(): void {
   mainWindow.on('ready-to-show', () => {
     mainWindow.setTitle('კოდერი');
   });
+
+  return mainWindow;
 }
 
 // აპლიკაციის მენიუ — მინიმალური, სუფთა
@@ -116,7 +119,12 @@ app.whenReady().then(() => {
     app.dock.setIcon(nativeImage.createFromPath(iconPath));
   }
 
-  createWindow();
+  const mainWindow = createWindow();
+
+  // ავტო-განახლება (მხოლოდ packaged აპში)
+  if (!isDev) {
+    setupAutoUpdater(mainWindow);
+  }
 
   // macOS-ზე dock-ზე დაკლიკებისას ახალი ფანჯრის შექმნა
   app.on('activate', () => {

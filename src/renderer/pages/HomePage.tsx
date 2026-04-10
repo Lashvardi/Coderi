@@ -8,6 +8,7 @@ import logoSvg from '../assets/logo.svg';
 import { useAuth } from '../context/AuthContext';
 import { APP_LABEL } from '../constants';
 import TitleBar from '../components/TitleBar';
+import UpdateNotification from '../components/UpdateNotification';
 import '../styles/global.css';
 
 const HomePage: React.FC = () => {
@@ -25,6 +26,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="home-container">
       <TitleBar />
+      <UpdateNotification />
       {/* ლოგო და სათაური */}
       <div className="home-header">
         <div className="home-logo">

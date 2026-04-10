@@ -9,7 +9,10 @@
     "dev:electron": "wait-on http://localhost:5200 && tsc -p tsconfig.main.json && electron .",
     "build": "tsc -p tsconfig.main.json && vite build",
     "pack": "npm run build && electron-builder",
-    "dist": "npm run build && electron-builder --win"
+    "pack:mac": "npm run build && electron-builder --mac",
+    "pack:win": "npm run build && electron-builder --win",
+    "pack:all": "npm run build && electron-builder --mac --win",
+    "publish": "npm run build && electron-builder --mac --win --publish always"
   },
   "author": "",
   "license": "MIT",
@@ -36,18 +39,31 @@
       "dist/**/*",
       "resources/icon.png"
     ],
+    "publish": {
+      "provider": "github",
+      "owner": "YOUR_GITHUB_USERNAME",
+      "repo": "Coderi"
+    },
     "mac": {
       "icon": "resources/icon.icns",
       "category": "public.app-category.education",
-      "target": ["dmg"]
+      "identity": null,
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
       "icon": "resources/icon.ico",
-      "target": ["nsis"]
+      "target": [
+        "nsis"
+      ]
     },
     "linux": {
       "icon": "resources/icon.png",
-      "target": ["AppImage"]
+      "target": [
+        "AppImage"
+      ]
     },
     "nsis": {
       "oneClick": true,
@@ -56,6 +72,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
+    "electron-updater": "^6.8.3",
     "lucide-react": "^0.400.0",
     "monaco-editor": "^0.50.0",
     "react": "^18.3.0",

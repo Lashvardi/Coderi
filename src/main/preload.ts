@@ -45,6 +45,31 @@ contextBridge.exposeInMainWorld('koderiAPI', {
     close: () => ipcRenderer.send('window:close'),
   },
 
+  // ავტო-განახლება
+  update: {
+    check: () => ipcRenderer.invoke('update:check'),
+    download: () => ipcRenderer.invoke('update:download'),
+    install: () => ipcRenderer.invoke('update:install'),
+    onChecking: (cb: () => void) => {
+      ipcRenderer.on('update:checking', () => cb());
+    },
+    onAvailable: (cb: (version: string) => void) => {
+      ipcRenderer.on('update:available', (_e, version) => cb(version));
+    },
+    onNotAvailable: (cb: () => void) => {
+      ipcRenderer.on('update:not-available', () => cb());
+    },
+    onProgress: (cb: (percent: number) => void) => {
+      ipcRenderer.on('update:progress', (_e, percent) => cb(percent));
+    },
+    onDownloaded: (cb: () => void) => {
+      ipcRenderer.on('update:downloaded', () => cb());
+    },
+    onError: (cb: (msg: string) => void) => {
+      ipcRenderer.on('update:error', (_e, msg) => cb(msg));
+    },
+  },
+
   // კოდის გაშვების API
   run: {
     frontend: (projectName: string, username?: string) =>
